@@ -1,6 +1,13 @@
 {
     "Server": {
         "port": 3000,
-        "static-files-folder": "public"
+        "static-files-folder": "public",
+        "database": {
+            "impl": "mongodb",
+            "url": "mongodb://<dbuser>:<dbpassword>@ds161584.mlab.com:61584/todo-app-tutorial-db",
+            "dbuser": "basic-node-server-default-user",
+            "dbpassword": "qwerty12345",
+            "comments": "user is read-only"
+        }
     }
 }

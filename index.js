@@ -1,9 +1,30 @@
 const config = require('config')
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const mongoClient = require('mongodb').MongoClient
 
 const serverConfig = config.get('Server')
 const app = express()
+
+const rawMongoDbServerUrl = serverConfig.get('database.url')
+const authMongoDbServerUrl = rawMongoDbServerUrl
+    .replace('<dbuser>', serverConfig.get('database.dbuser'))
+    .replace('<dbpassword>', serverConfig.get('database.dbpassword'))
+
+mongoClient.connect(authMongoDbServerUrl, 
+    {
+        useNewUrlParser: true
+    }, 
+    function(err, db) {
+        if (err == null) {
+            console.log("Connected to MongoDB Database!")
+        }
+        else {
+            console.log(err)
+        }
+        // db.close()
+    }
+)
 
 // Logging middlware
 app.use((request, response, next) => {
