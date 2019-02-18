@@ -1,8 +1,9 @@
+const config = require('config')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 
+const serverConfig = config.get('Server')
 const app = express()
-const port = 3000
 
 // Logging middlware
 app.use((request, response, next) => {
@@ -14,7 +15,7 @@ app.use(cookieParser())
 
 // Serving
 // Static files
-app.use(express.static('public'))
+app.use(express.static(serverConfig.get('static-files-folder')))
 
 // GET
 app.get('/', (request, response) => {
@@ -45,6 +46,7 @@ app.use((err, request, response, next) => {
 })
 
 // Start server listen
+const port = serverConfig.get('port')
 app.listen(port, (err) => {
     if (err) {
         return console.log('something bad happened', err)

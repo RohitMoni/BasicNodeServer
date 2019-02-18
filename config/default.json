@@ -1,0 +1,6 @@
+{
+    "Server": {
+        "port": 3000,
+        "static-files-folder": "public"
+    }
+}
