@@ -2,12 +2,16 @@
     "Server": {
         "port": 3000,
         "static-files-folder": "public",
-        "database": {
-            "impl": "mongodb",
-            "url": "mongodb://<dbuser>:<dbpassword>@ds161584.mlab.com:61584/todo-app-tutorial-db",
-            "dbuser": "basic-node-server-default-user",
-            "dbpassword": "qwerty12345",
-            "comments": "user is read-only"
+        "database": "mongodb-local-server",
+        "database-list": {
+            "mongodb-mlab": {
+                "url": "mongodb://basic-node-server-default-user:qwerty12345@ds161584.mlab.com:61584/todo-app-tutorial-db",
+                "comments": "user is read-only"
+            },
+            "mongodb-local-server": {
+                "url": "mongodb://localhost:27017",
+                "comments": "default mongodb server instance running on the same machine"
+            }
         }
     }
 }

@@ -4,14 +4,13 @@ const cookieParser = require('cookie-parser')
 const mongoClient = require('mongodb').MongoClient
 
 const serverConfig = config.get('Server')
+const database = serverConfig.get('database')
+const databaseConfig = serverConfig.get('database-list.' + database)
 const app = express()
 
-const rawMongoDbServerUrl = serverConfig.get('database.url')
-const authMongoDbServerUrl = rawMongoDbServerUrl
-    .replace('<dbuser>', serverConfig.get('database.dbuser'))
-    .replace('<dbpassword>', serverConfig.get('database.dbpassword'))
+const dbUrl = databaseConfig.get('url')
 
-mongoClient.connect(authMongoDbServerUrl, 
+mongoClient.connect(dbUrl, 
     {
         useNewUrlParser: true
     }, 
